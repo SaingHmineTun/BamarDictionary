@@ -11,7 +11,7 @@ import java.util.List;
 import it.saimao.bamardictionary.entities.FavoriteEntity;
 
 @Dao
-public interface FavoriteDao {
+public interface FavouriteDao {
     @Insert
     void insert(FavoriteEntity favoriteEntity);
 
@@ -23,5 +23,8 @@ public interface FavoriteDao {
 
     @Query("SELECT * FROM favorite")
     List<FavoriteEntity> getAll();
+
+    @Query("SELECT * FROM favorite WHERE id = :id")
+    FavoriteEntity getById(int id);
 
 }

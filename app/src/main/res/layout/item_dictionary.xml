@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/DictionaryCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    style="@style/DictionaryCard">
+    android:layout_margin="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,25 +12,39 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvWord"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvWord"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivFavourite"
+                android:layout_marginEnd="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_favourite" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvSubTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Sub Title"
-            android:textSize="14sp"
+            android:ellipsize="end"
             android:maxLines="2"
-            android:ellipsize="end" />
+            android:text="Sub Title"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

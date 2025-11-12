@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import it.saimao.bamardictionary.dao.DictionaryDao;
-import it.saimao.bamardictionary.dao.FavoriteDao;
+import it.saimao.bamardictionary.dao.FavouriteDao;
 import it.saimao.bamardictionary.entities.DictionaryEntity;
 import it.saimao.bamardictionary.entities.FavoriteEntity;
 
@@ -15,7 +15,7 @@ import it.saimao.bamardictionary.entities.FavoriteEntity;
 public abstract class DictionaryDatabase extends RoomDatabase {
     public abstract DictionaryDao dictionaryDao();
 
-    public abstract FavoriteDao favoriteDao();
+    public abstract FavouriteDao favoriteDao();
 
     private static DictionaryDatabase instance;
 

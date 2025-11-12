@@ -15,14 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.List;
 
 import it.saimao.bamardictionary.DictionaryDatabase;
+import it.saimao.bamardictionary.R;
 import it.saimao.bamardictionary.adapters.DictionaryAdapter;
 import it.saimao.bamardictionary.dao.DictionaryDao;
+import it.saimao.bamardictionary.dao.FavouriteDao;
 import it.saimao.bamardictionary.databinding.FragmentHomeBinding;
 import it.saimao.bamardictionary.entities.DictionaryEntity;
+import it.saimao.bamardictionary.entities.FavoriteEntity;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private DictionaryDao dictionaryDao;
+    private FavouriteDao favouriteDao;
     private DictionaryAdapter dictionaryAdapter;
 
 
@@ -36,13 +40,14 @@ public class HomeFragment extends Fragment {
     }
 
     private void initAdapter() {
-        dictionaryAdapter = new DictionaryAdapter();
+        dictionaryAdapter = new DictionaryAdapter(favouriteDao);
         binding.rvWords.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvWords.setAdapter(dictionaryAdapter);
     }
 
     private void initDaos() {
         dictionaryDao = DictionaryDatabase.getInstance(getContext()).dictionaryDao();
+        favouriteDao = DictionaryDatabase.getInstance(getContext()).favoriteDao();
     }
 
     private void initActions() {
