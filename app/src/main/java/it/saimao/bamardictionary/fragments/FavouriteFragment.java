@@ -60,5 +60,6 @@ public class FavouriteFragment extends Fragment {
         adapter = new DictionaryAdapter(favouriteDao);
         binding.rvFavourite.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvFavourite.setAdapter(adapter);
+        adapter.setOnFavouriteRemoveListener(id -> updateList());
     }
 }

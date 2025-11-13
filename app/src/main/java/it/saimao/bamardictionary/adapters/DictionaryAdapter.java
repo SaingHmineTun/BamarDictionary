@@ -21,6 +21,17 @@ import it.saimao.bamardictionary.entities.FavoriteEntity;
 import it.saimao.bamardictionary.fragments.FavouriteFragment;
 
 public class DictionaryAdapter extends ListAdapter<DictionaryEntity, DictionaryAdapter.DictionaryViewHolder> {
+
+    public interface OnFavouriteRemoveListener {
+        void onFavouriteRemove(int id);
+    }
+
+    private OnFavouriteRemoveListener onFavouriteRemoveListener;
+
+    public void setOnFavouriteRemoveListener(OnFavouriteRemoveListener onFavouriteRemoveListener) {
+        this.onFavouriteRemoveListener = onFavouriteRemoveListener;
+    }
+
     private static final DiffUtil.ItemCallback<DictionaryEntity> itemCallback = new DiffUtil.ItemCallback<>() {
         @Override
         public boolean areItemsTheSame(@NonNull DictionaryEntity oldItem, @NonNull DictionaryEntity newItem) {
@@ -33,6 +44,7 @@ public class DictionaryAdapter extends ListAdapter<DictionaryEntity, DictionaryA
         }
     };
     private final FavouriteDao favouriteDao;
+
     public DictionaryAdapter(FavouriteDao favouriteDao) {
         super(itemCallback);
         this.favouriteDao = favouriteDao;
@@ -48,6 +60,7 @@ public class DictionaryAdapter extends ListAdapter<DictionaryEntity, DictionaryA
     public void onBindViewHolder(@NonNull DictionaryViewHolder holder, int position) {
         holder.bind(getCurrentList().get(position));
     }
+
     public class DictionaryViewHolder extends RecyclerView.ViewHolder {
         private ItemDictionaryBinding binding;
 
@@ -82,8 +95,10 @@ public class DictionaryAdapter extends ListAdapter<DictionaryEntity, DictionaryA
                     favouriteDao.insert(favoriteEntity);
                     binding.ivFavourite.setImageResource(R.drawable.ic_fill_favourite);
                 }
+                if (onFavouriteRemoveListener != null) {
+                    onFavouriteRemoveListener.onFavouriteRemove(favoriteEntity.getId());
+                }
             });
-
 
         }
 
