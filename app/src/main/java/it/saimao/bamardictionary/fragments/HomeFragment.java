@@ -3,6 +3,7 @@ package it.saimao.bamardictionary.fragments;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,12 @@ public class HomeFragment extends Fragment {
         initActions();
         binding.etSearchWord.setText("");
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        binding.etSearchWord.setText(binding.etSearchWord.getText());
     }
 
     private void initAdapter() {

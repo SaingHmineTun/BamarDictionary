@@ -14,7 +14,7 @@ public interface DictionaryDao {
     starts with - stripword%
     ends with   - %stripword
      */
-    @Query("SELECT * FROM dictionary ORDER BY RANDOM() LIMIT 100")
+    @Query("SELECT * FROM dictionary LIMIT 100")
     List<DictionaryEntity> getAllDictionary();
     @Query("SELECT * FROM dictionary WHERE stripword LIKE :stripWord LIMIT 100")
     List<DictionaryEntity> getDictionaryByStripWord(String stripWord);

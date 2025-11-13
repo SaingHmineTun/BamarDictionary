@@ -19,14 +19,19 @@ import com.google.android.material.chip.Chip;
 import java.util.Locale;
 
 import it.saimao.bamardictionary.DictionaryDatabase;
+import it.saimao.bamardictionary.R;
 import it.saimao.bamardictionary.dao.DictionaryDao;
+import it.saimao.bamardictionary.dao.FavouriteDao;
 import it.saimao.bamardictionary.databinding.ActivityWordBinding;
 import it.saimao.bamardictionary.entities.DictionaryEntity;
+import it.saimao.bamardictionary.entities.FavoriteEntity;
 
 public class WordActivity extends AppCompatActivity {
     private ActivityWordBinding binding;
     private DictionaryDao dictionaryDao;
+    private FavouriteDao favouriteDao;
     private TextToSpeech tts;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,24 +77,45 @@ public class WordActivity extends AppCompatActivity {
                 Toast.makeText(this, "Text-to-Speech not available", Toast.LENGTH_SHORT).show();
             }
         });
+
+        binding.ivFavourite.setOnClickListener(v -> {
+            FavoriteEntity favoriteEntity = new FavoriteEntity();
+            favoriteEntity.setId(id);
+            if (favouriteDao.getById(id) != null) { // is favourite: un-favourite it
+                favouriteDao.delete(favoriteEntity);
+                binding.ivFavourite.setImageResource(R.drawable.ic_favourite);
+            } else {
+                favouriteDao.insert(favoriteEntity);
+                binding.ivFavourite.setImageResource(R.drawable.ic_fill_favourite);
+            }
+        });
+
     }
 
 
     private void initData() {
         dictionaryDao = DictionaryDatabase.getInstance(this).dictionaryDao();
-        int id = getIntent().getIntExtra("id", -1);
+        favouriteDao = DictionaryDatabase.getInstance(this).favoriteDao();
+        id = getIntent().getIntExtra("id", -1);
         if (id != -1) {
             DictionaryEntity dict = dictionaryDao.getDictionaryById(id);
             updateUi(dict);
         }
     }
-
     private void updateUi(DictionaryEntity dict) {
         binding.tvWord.setText(dict.getStripWord());
         binding.tvMeaning.setText(Html.fromHtml(dict.getDefinition(), 0));
         addSynonyms(dict);
         addKeywords(dict);
         addImage(dict.getPicture());
+        initFavourite(dict.getId());
+    }
+    private void initFavourite(int id) {
+        if (favouriteDao.getById(id) != null) {
+            binding.ivFavourite.setImageResource(R.drawable.ic_fill_favourite);
+        } else {
+            binding.ivFavourite.setImageResource(R.drawable.ic_favourite);
+        }
     }
 
     private void addImage(String picture) {

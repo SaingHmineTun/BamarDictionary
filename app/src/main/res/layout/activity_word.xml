@@ -36,8 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cardElevation="4dp"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,10 +64,11 @@
                             android:id="@+id/ivSpeaker"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:backgroundTint="?colorPrimary"
                             android:contentDescription="Speak"
                             android:src="@drawable/ic_speaker"
                             app:fabSize="mini"
-                            app:tint="?attr/colorOnPrimary" />
+                            app:tint="?colorOnPrimary" />
 
                     </LinearLayout>
 
@@ -78,8 +79,8 @@
                         android:layout_marginTop="16dp"
                         android:scaleType="centerCrop"
                         android:visibility="gone"
-                        tools:visibility="visible"
-                        tools:src="@tools:sample/backgrounds/scenic" />
+                        tools:src="@tools:sample/backgrounds/scenic"
+                        tools:visibility="visible" />
 
                 </LinearLayout>
 
@@ -90,8 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="16dp"
-                app:cardElevation="4dp"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,21 +100,34 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Definition"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:text="Definition"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivFavourite"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_favourite" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvMeaning"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.2"
                         android:text="meaning in bamar"
-                        android:textSize="16sp"
-                        android:lineSpacingMultiplier="1.2" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:id="@+id/lyKeywords"
@@ -127,10 +141,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:text="Keywords"
                             android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:textStyle="bold" />
 
                         <com.google.android.material.chip.ChipGroup
                             android:id="@+id/cgKeywords"
@@ -153,10 +167,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:text="Synonyms"
                             android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:textStyle="bold" />
 
                         <com.google.android.material.chip.ChipGroup
                             android:id="@+id/cgSynonyms"
